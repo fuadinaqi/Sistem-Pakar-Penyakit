@@ -3,6 +3,7 @@
   <% include ./partials/head %>
   <body>
     <h1>Edit Diagnosa</h1>
+    <h3><%= err %></h3>
     <form action="/diagnosas/edit/<%= dataDiagnosa.id %>" method="post">
       Nama Penyakit : <br>
       <input type="text" name="namaPenyakit" value="<%= dataDiagnosa.namaPenyakit %>"><br>

@@ -13,7 +13,9 @@ router.get('/', function(req, res) {
 })
 //ADD USER
 router.get('/add', function(req, res) {
-  res.render('addUser')
+  res.render('addUser', {
+    err : null,
+  })
 })
 router.post('/add', function(req, res) {
   let objCreate = {
@@ -27,7 +29,9 @@ router.post('/add', function(req, res) {
   })
   .catch(function(err) {
     console.log(err);
-    res.send(err)
+    res.render('addUser', {
+      err : err.message,
+    })
   })
 })
 //EDIT USER
@@ -36,7 +40,12 @@ router.get('/edit/:id', function(req, res) {
   .then(function(dataUser) {
     res.render('editUser', {
       dataUser : dataUser,
+      err      : null,
     })
+  })
+  .catch(function(err) {
+    console.log(err);
+    res.send(err)
   })
 })
 router.post('/edit/:id', function(req, res) {
@@ -55,8 +64,17 @@ router.post('/edit/:id', function(req, res) {
     res.redirect('/users')
   })
   .catch(function(err) {
-    console.log(err);
-    res.send(err)
+    Model.User.findById(req.params.id)
+    .then(function(dataUser) {
+      res.render('editUser', {
+        dataUser : dataUser,
+        err      : err.message,
+      })
+    })
+    .catch(function(err) {
+      console.log(err);
+      res.send(err)
+    })
   })
 })
 //DELETE USER

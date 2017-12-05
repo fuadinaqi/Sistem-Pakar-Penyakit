@@ -3,11 +3,12 @@
   <% include ./partials/head %>
   <body>
     <h1>Edit User</h1>
+    <h3><%= err %></h3>
     <form action="/users/edit/<%= dataUser.id %>" method="post">
       Username : <br>
       <input type="text" name="username" value="<%= dataUser.username %>"><br>
       Password : <br>
-      <input type="text" name="password" value=""><br>
+      <input type="text" name="password" value="<%= dataUser.password %>"><br>
       Email    : <br>
       <input type="text" name="email" value="<%= dataUser.email %>"><br>
       <br>

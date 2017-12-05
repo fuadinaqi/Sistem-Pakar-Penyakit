@@ -1,13 +1,67 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   var User = sequelize.define('User', {
-    username: DataTypes.STRING,
+    username: {
+      type      : DataTypes.STRING,
+      validate  : {
+        isNull(value, next) {
+          if (value.length == 0) {
+            next(`username tidak boleh kosong`)
+          } else {
+            next()
+          }
+        },
+        isUnique : function(value, next) {
+          User.findAll({
+            where :
+            {
+              username : value,
+              id : {[sequelize.Op.ne] : this.id}
+            }
+          })
+          .then((data) => {
+            if (data == null || data.length == 0) {
+              return next()
+            } else {
+              return next(`username ${data[0].username} sudah digunakan`)
+            }
+          })
+          .catch((err) => {
+            return next(err)
+          })
+        }
+      }
+    },
     password: DataTypes.STRING,
-    email: DataTypes.STRING
-  }, {
-    classMethods: {
-      associate: function(models) {
-        // associations can be defined here
+    email: {
+      type  : DataTypes.STRING,
+      validate  : {
+        isNull(value, next) {
+          if (value.length == 0) {
+            next(`email tidak boleh kosong`)
+          } else {
+            next()
+          }
+        },
+        isUnique : function(value, next) {
+          User.findAll({
+            where :
+            {
+              email : value,
+              id : {[sequelize.Op.ne] : this.id}
+            }
+          })
+          .then((data) => {
+            if (data == null || data.length == 0) {
+              return next()
+            } else {
+              return next(`email ${data[0].email} sudah digunakan`)
+            }
+          })
+          .catch((err) => {
+            return next(err)
+          })
+        }
       }
     }
   });

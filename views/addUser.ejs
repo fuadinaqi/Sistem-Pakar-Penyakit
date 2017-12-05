@@ -3,6 +3,7 @@
   <% include ./partials/head %>
   <body>
     <h1>Add User</h1>
+    <h3><%= err %></h3>
     <form action="/users/add" method="post">
       Username : <br>
       <input type="text" name="username" placeholder="Your username"><br>
