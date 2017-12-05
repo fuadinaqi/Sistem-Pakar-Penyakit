@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "bqhblgfj",
-    "password": "RlVz0cic9sdsHr3_h0rQFQBDI01XfkBZ",
-    "database": "bqhblgfj",
-    "host": "baasu.db.elephantsql.com",
+    "username": "postgres",
+    "password": "postgres",
+    "database": "fuadidb",
+    "host": "127.0.0.1",
     "dialect": "postgres",
     "port": 5432
   },
