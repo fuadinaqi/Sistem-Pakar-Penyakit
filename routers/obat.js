@@ -10,7 +10,9 @@ router.get('/', function (req, res) {
 })
 //add obat
 router.get('/add', function (req, res) {
-    res.render('addObat')
+    res.render('addObat', {
+        error: null
+    })
 })
 
 router.post('/add', function (req, res) {
@@ -25,8 +27,10 @@ router.post('/add', function (req, res) {
             res.redirect('/obats')
         })
         .catch(function (err) {
-            console.log(err)
-            res.send(err)
+            // err = 'input tidak boleh kosong'
+            res.render('addObat', {
+                error: err.message
+            })
         })
 
 })
@@ -37,6 +41,7 @@ router.get('/edit/:id', function (req, res) {
     Model.Obat.findById(id).then(function (dataObat) {
         // res.send(dataObat)
         res.render('editObat', {
+            error: null,
             obat: dataObat,
         })
     })
@@ -57,20 +62,27 @@ router.post('/edit/:id', function (req, res) {
         })
         .catch(function (err) {
             console.log(err)
-            res.send(err)
+
+            Model.Obat.findById(id).then(function (dataObat) {
+                // res.send(dataObat)
+                res.render('editObat', {
+                    error: err.message,
+                    obat: dataObat,
+                })
+            })
         })
 })
 
 router.get('/delete/:id', function (req, res) {
     let id = req.params.id
     Model.Obat.destroy({ where: { id } })
-    .then(function(){
-        res.redirect('/obats')
-    })
-    .catch(function(err){
-        console.log(err)
-        res.send(err)
-    })
+        .then(function () {
+            res.redirect('/obats')
+        })
+        .catch(function (err) {
+            console.log(err)
+            res.send(err)
+        })
 })
 
 module.exports = router
