@@ -38,7 +38,7 @@ router.get('/edit/:id', function (req, res) {
     let id = req.params.id
 
     Model.Diagnosa.findById(id).then(function (dataDiagnosa) {
-        // res.send(dataObat)
+        // res.send(dataDiagnosa)
         res.render('editDiagnosa', {
             dataDiagnosa: dataDiagnosa,
             err : null,
