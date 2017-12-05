@@ -3,6 +3,7 @@
   <% include ./partials/head %>
   <body>
     <h1>Diagnosa</h1>
+    <a href="/diagnosas/add">Add Diagnosa</a>
     <table border="1">
       <tr>
         <th>No</th>
@@ -16,9 +17,9 @@
         <td><%= count %></td>
         <td><%= diagnosa.namaPenyakit %></td>
         <td>
-          <a href="/diagnosas/edit/<%= diagnosa.id %>"></a>
+          <a href="/diagnosas/edit/<%= diagnosa.id %>">Edit</a>
           |
-          <a href="/diagnosas/delete/<%= diagnosa.id %>"></a>
+          <a href="/diagnosas/delete/<%= diagnosa.id %>" onclick="return confirm(`Apakah anda yakin menghapusnya?`)">Delete</a>
         </td>
       </tr>
       <% count++ %>
