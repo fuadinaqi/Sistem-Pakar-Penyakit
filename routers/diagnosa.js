@@ -60,7 +60,7 @@ router.post('/edit/:id', function (req, res) {
         })
         .catch(function (err) {
           Model.Diagnosa.findById(id).then(function (dataDiagnosa) {
-              // res.send(dataObat)
+              
               res.render('editDiagnosa', {
                   dataDiagnosa: dataDiagnosa,
                   err : err.message,
