@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <% include ./partials/head %>
+  <body>
+    <h1>edit obat</h1>
+    <form action="/obats/edit/<%=obat.id%>" method="post">
+            Nama Obat:<br>
+            <input type="text" name="namaObat" value="<%= obat.namaObat%>"> <br>
+            Implikasi Obat:<br>
+            <input type="text" name="implikasiObat" value="<%=obat.implikasiObat%>">
+            <input type="submit" value="Submit">
+          </form> 
+  </body>
+</html>

@@ -1,7 +1,49 @@
 <!DOCTYPE html>
 <html>
-  <% include ./partials/head %>
+<% include ./partials/head %>
+
   <body>
+    <h1>obat</h1>
+    <a href="/obats/add">add obat</a>
+    <br>
+    <br>
+    <table border="1">
+      <tr>
+        <th>no</th>
+        <th>id</th>
+        <th>nama obat</th>
+        <th>implikasi</th>
+        <th>action</th>
+      </tr>
+      <%let count = 1%>
+        <%obat.forEach(function(row){%>
+          <tr>
+
+            <td>
+              <%=count%>
+            </td>
+            <td>
+              <%=row.id%>
+            </td>
+            <td>
+              <%=row.namaObat%>
+            </td>
+            <td>
+              <%=row.implikasiObat%>
+            </td>
+            <td>
+              <a href="/obats/edit/<%=row.id%>">edit obat</a>
+              <a href="/obats/delete/<%=row.id%>" onclick="return confirm (`delete?`);">delete</a>
+            </td>
+
+          </tr>
+          <%count++%>
+            <%})%>
+
+    </table>
+
+
 
   </body>
+
 </html>
