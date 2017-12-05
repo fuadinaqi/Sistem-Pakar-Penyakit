@@ -33,5 +33,8 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   });
+  Diagnosa.associate = function (models) {
+    Diagnosa.belongsToMany(models.Obat, {through : 'DiagnosaDetail'})
+  };
   return Diagnosa;
 };

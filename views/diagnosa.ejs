@@ -17,6 +17,8 @@
         <td><%= count %></td>
         <td><%= diagnosa.namaPenyakit %></td>
         <td>
+          <a href="/diagnosas/assignObat/<%= diagnosa.id %>">Assign Obat</a>
+          |
           <a href="/diagnosas/edit/<%= diagnosa.id %>">Edit</a>
           |
           <a href="/diagnosas/delete/<%= diagnosa.id %>" onclick="return confirm(`Apakah anda yakin menghapusnya?`)">Delete</a>

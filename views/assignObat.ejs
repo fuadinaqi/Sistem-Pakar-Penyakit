@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <% include ./partials/head %>
+  <body>
+    <h1>Assign Obat</h1>
+    <h3><%= dataDiagnosa.namaPenyakit %></h3>
+    <form action="/diagnosas/assignObat/<%= dataDiagnosa.id %>" method="post">
+      Pilihan Obat : <br>
+      <select name="ObatId">
+        <% dataObats.forEach(function(obat) { %>
+        <option value="<%= obat.id %>"><%= obat.namaObat %></option>
+        <% }) %>
+      </select><br><br>
+      <input type="submit" value="Assign Obat">
+    </form>
+  </body>
+</html>

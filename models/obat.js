@@ -33,5 +33,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING
     }
   });
+  Obat.associate = function (models) {
+    Obat.belongsToMany(models.Diagnosa, {through : 'DiagnosaDetail'})
+  };
   return Obat;
 };
