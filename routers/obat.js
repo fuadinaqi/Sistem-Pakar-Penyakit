@@ -18,8 +18,8 @@ router.get('/add', function (req, res) {
 router.post('/add', function (req, res) {
     // res.send('masuk ke post')
     let objObat = {
-        namaObat: req.body.namaObat,
-        implikasiObat: req.body.implikasiObat
+        namaObat: req.body.namaObat.toLowerCase(),
+        implikasiObat: req.body.implikasiObat.toLowerCase()
     }
     Model.Obat.create(objObat)
         .then(function () {
@@ -52,8 +52,8 @@ router.post('/edit/:id', function (req, res) {
     let id = req.params.id
     let objObat = {
         id: id,
-        namaObat: req.body.namaObat,
-        implikasiObat: req.body.implikasiObat
+        namaObat: req.body.namaObat.toLowerCase(),
+        implikasiObat: req.body.implikasiObat.toLowerCase()
     }
 
     Model.Obat.update(objObat, { where: { id } })

@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
           Obat.findAll({
             where:
               {
-                namaObat: this.namaObat,
+                namaObat: this.namaObat.toLowerCase(),
                 id: { [sequelize.Op.ne]: this.id }
               }
           }).then(function (result) {
