@@ -10,17 +10,17 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 
-const User = require('./routes/user') 
-const Obat = require('./routes/obat')
-const Diagnosa = require('./routes/diagnosa')
+const User = require('./routers/user') 
+const Obat = require('./routers/obat')
+const Diagnosa = require('./routers/diagnosa')
 
 app.use('/users', User)
 app.use('/obats', Obat)
 app.use('/diagnosas', Diagnosa)
 
 app.get('/', (req, res) => {
-    res.send('masuk')
+    res.render('home')
 })
 
 
-app.listen(3000)
+app.listen(3000,console.log('ALIVE'))
