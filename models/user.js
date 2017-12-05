@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
           User.findAll({
             where :
             {
-              username : value,
+              username : value.toLowerCase(),
               id : {[sequelize.Op.ne] : this.id}
             }
           })

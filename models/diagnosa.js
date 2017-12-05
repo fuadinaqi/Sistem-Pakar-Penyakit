@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
           Diagnosa.findAll({
             where :
             {
-              namaPenyakit : value,
+              namaPenyakit : value.toLowerCase(),
               id : {[sequelize.Op.ne] : this.id}
             }
           })

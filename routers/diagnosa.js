@@ -19,7 +19,7 @@ router.get('/add', function (req, res) {
 router.post('/add', function (req, res) {
     // res.send('masuk ke post')
     let objDiagnosa = {
-        namaPenyakit: req.body.namaPenyakit
+        namaPenyakit: req.body.namaPenyakit.toLowerCase()
     }
     Model.Diagnosa.create(objDiagnosa)
         .then(function () {
@@ -51,7 +51,7 @@ router.post('/edit/:id', function (req, res) {
     let id = req.params.id
     let objDiagnosa = {
         id: id,
-        namaPenyakit: req.body.namaPenyakit
+        namaPenyakit: req.body.namaPenyakit.toLowerCase()
     }
 
     Model.Diagnosa.update(objDiagnosa, { where: { id } })

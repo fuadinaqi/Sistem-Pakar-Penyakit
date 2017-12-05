@@ -19,9 +19,9 @@ router.get('/add', function(req, res) {
 })
 router.post('/add', function(req, res) {
   let objCreate = {
-    username : req.body.username,
+    username : req.body.username.toLowerCase(),
     password : req.body.password,
-    email    : req.body.email,
+    email    : req.body.email.toLowerCase(),
   }
   Model.User.create(objCreate)
   .then(function() {
@@ -51,9 +51,9 @@ router.get('/edit/:id', function(req, res) {
 router.post('/edit/:id', function(req, res) {
   let objUpdate = {
     id       : req.params.id,
-    username : req.body.username,
+    username : req.body.username.toLowerCase(),
     password : req.body.password,
-    email    : req.body.email,
+    email    : req.body.email.toLowerCase(),
   }
   Model.User.update(objUpdate, {
     where : {
