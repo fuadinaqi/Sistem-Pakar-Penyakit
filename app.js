@@ -10,13 +10,13 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 
-// const Teacher = require('./routes/teacher') diganti sama nama model,router buat model
-// const Subject = require('./routes/subject')
-// const Student = require('./routes/student')
+const User = require('./routes/user') 
+const Obat = require('./routes/obat')
+const Diagnosa = require('./routes/diagnosa')
 
-// app.use('/teachers', Teacher)
-// app.use('/subjects', Subject)
-// app.use('/students', Student)
+app.use('/users', User)
+app.use('/obats', Obat)
+app.use('/diagnosas', Diagnosa)
 
 app.get('/', (req, res) => {
     res.send('masuk')
