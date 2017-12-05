@@ -2,6 +2,27 @@
 <html>
   <% include ./partials/head %>
   <body>
+    <h1>Diagnosa</h1>
+    <table border="1">
+      <tr>
+        <th>No</th>
+        <th>Nama Penyakit</th>
+        <th>Action</th>
+      </tr>
 
+      <% let count = 1 %>
+      <% dataDiagnosas.forEach(function(diagnosa) { %>
+      <tr>
+        <td><%= count %></td>
+        <td><%= diagnosa.namaPenyakit %></td>
+        <td>
+          <a href="/diagnosas/edit/<%= diagnosa.id %>"></a>
+          |
+          <a href="/diagnosas/delete/<%= diagnosa.id %>"></a>
+        </td>
+      </tr>
+      <% count++ %>
+      <% }) %>
+    </table>
   </body>
 </html>
