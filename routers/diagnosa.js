@@ -12,7 +12,7 @@ router.get('/', function (req, res) {
 //add obat
 router.get('/add', function (req, res) {
     res.render('addDiagnosa', {
-      err : null,
+        err: null,
     })
 })
 
@@ -28,7 +28,7 @@ router.post('/add', function (req, res) {
         })
         .catch(function (err) {
             res.render('addDiagnosa', {
-              err : err.message,
+                err: err.message,
             })
         })
 
@@ -41,7 +41,7 @@ router.get('/edit/:id', function (req, res) {
         // res.send(dataDiagnosa)
         res.render('editDiagnosa', {
             dataDiagnosa: dataDiagnosa,
-            err : null,
+            err: null,
         })
     })
 })
@@ -59,13 +59,13 @@ router.post('/edit/:id', function (req, res) {
             res.redirect('/diagnosas')
         })
         .catch(function (err) {
-          Model.Diagnosa.findById(id).then(function (dataDiagnosa) {
+            Model.Diagnosa.findById(id).then(function (dataDiagnosa) {
 
-              res.render('editDiagnosa', {
-                  dataDiagnosa: dataDiagnosa,
-                  err : err.message,
-              })
-          })
+                res.render('editDiagnosa', {
+                    dataDiagnosa: dataDiagnosa,
+                    err: err.message,
+                })
+            })
         })
 })
 // delete obat
@@ -81,41 +81,56 @@ router.get('/delete/:id', function (req, res) {
         })
 })
 //assign obat
-router.get('/assignObat/:id', function(req, res) {
-  Model.Diagnosa.findOne({
-    where : {id : req.params.id}
-  })
-  .then(function(dataDiagnosa) {
-    Model.Obat.findAll()
-    .then(function(dataObats) {
-      res.render('assignObat', {
-        dataDiagnosa : dataDiagnosa,
-        dataObats    : dataObats,
-      })
+router.get('/assignObat/:id', function (req, res) {
+    Model.Diagnosa.findOne({
+        where: { id: req.params.id }
     })
-    .catch(function(err) {
-      console.log(err);
-      res.send(err)
-    })
-  })
-  .catch(function(err) {
-    console.log(err);
-    res.send(err)
-  })
+        .then(function (dataDiagnosa) {
+            Model.Obat.findAll()
+                .then(function (dataObats) {
+                    res.render('assignObat', {
+                        dataDiagnosa: dataDiagnosa,
+                        dataObats: dataObats,
+                    })
+                })
+                .catch(function (err) {
+                    console.log(err);
+                    res.send(err)
+                })
+        })
+        .catch(function (err) {
+            console.log(err);
+            res.send(err)
+        })
 })
-router.post('/assignObat/:id', function(req, res) {
-  let objAssign = {
-    DiagnosaId  : req.params.id,
-    ObatId      : req.body.ObatId,
-  }
-  Model.DiagnosaDetail.create(objAssign)
-  .then(function() {
-    res.redirect('/diagnosas')
-  })
-  .catch(function(err) {
-    console.log(err);
-    res.send(err)
-  })
+router.post('/assignObat/:id', function (req, res) {
+    let objAssign = {
+        DiagnosaId: req.params.id,
+        ObatId: req.body.ObatId,
+    }
+    Model.DiagnosaDetail.create(objAssign)
+        .then(function () {
+            res.redirect('/diagnosas')
+        })
+        .catch(function (err) {
+            console.log(err);
+            res.send(err)
+        })
+})
+// select * from namaTable where diagnosa like %panas%
+
+router.get('/listObat/:id', function (req, res) {
+    // res.send("masuk sini")
+
+    Model.Diagnosa.findById(req.params.id, {
+        include: [Model.Obat, Model.DiagnosaDetail]
+    }).then(function (result) {
+        res.render('listObat', {
+            dataConjunction: result
+        })
+    }).catch(function (err) {
+        res.send(err)
+    })
 })
 
 module.exports = router

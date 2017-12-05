@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<% include ./partials/head %>
+
+    <body>
+        <h1>
+            <%= dataConjunction.namaPenyakit%>
+        </h1>
+        <table border="1">
+            <tr>
+                <th>no</th>
+                <th>nama obat</th>
+            </tr>
+            <%let count = 1%>
+            <%dataConjunction.Obats.forEach(function(rowObat){%>
+                <tr>
+
+                    <th><%=count%></th>
+                    <th>
+                        <%=rowObat.namaObat %>
+                    </th>
+                    <%count++%>
+                </tr>
+                <%})%>
+        </table>
+    </body>
+
+</html>

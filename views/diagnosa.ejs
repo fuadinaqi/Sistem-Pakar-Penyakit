@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <% include ./partials/head %>
+<% include ./partials/head %>
+
   <body>
     <h1>Diagnosa</h1>
     <a href="/diagnosas/add">Add Diagnosa </a>
@@ -12,20 +13,27 @@
       </tr>
 
       <% let count = 1 %>
-      <% dataDiagnosas.forEach(function(diagnosa) { %>
-      <tr>
-        <td><%= count %></td>
-        <td><%= diagnosa.namaPenyakit %></td>
-        <td>
-          <a href="/diagnosas/assignObat/<%= diagnosa.id %>">Assign Obat</a>
-          |
-          <a href="/diagnosas/edit/<%= diagnosa.id %>">Edit</a>
-          |
-          <a href="/diagnosas/delete/<%= diagnosa.id %>" onclick="return confirm(`Apakah anda yakin menghapusnya?`)">Delete</a>
-        </td>
-      </tr>
-      <% count++ %>
-      <% }) %>
+        <% dataDiagnosas.forEach(function(diagnosa) { %>
+          <tr>
+            <td>
+              <%= count %>
+            </td>
+            <td>
+              <%= diagnosa.namaPenyakit %>
+            </td>
+            <td>
+              <a href="/diagnosas/listObat/<%= diagnosa.id %>">List Obat</a>
+              |
+              <a href="/diagnosas/assignObat/<%= diagnosa.id %>">Assign Obat</a>
+              |
+              <a href="/diagnosas/edit/<%= diagnosa.id %>">Edit</a>
+              |
+              <a href="/diagnosas/delete/<%= diagnosa.id %>" onclick="return confirm(`Apakah anda yakin menghapusnya?`)">Delete</a>
+            </td>
+          </tr>
+          <% count++ %>
+            <% }) %>
     </table>
   </body>
+
 </html>

@@ -34,6 +34,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
   Obat.associate = function (models) {
+    Obat.hasMany(models.DiagnosaDetail)
     Obat.belongsToMany(models.Diagnosa, {through : 'DiagnosaDetail'})
   };
   return Obat;
