@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 
-const User = require('./routers/user') 
+const User = require('./routers/user')
 const Obat = require('./routers/obat')
 const Diagnosa = require('./routers/diagnosa')
 
@@ -23,4 +23,4 @@ app.get('/', (req, res) => {
 })
 
 
-app.listen(4000,console.log('ALIVE'))
+app.listen(3000,console.log('ALIVE'))

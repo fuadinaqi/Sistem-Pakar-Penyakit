@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <% include ./partials/head %>
+  <body>
+    <h1>Add User</h1>
+    <form action="/users/add" method="post">
+      Username : <br>
+      <input type="text" name="username" placeholder="Your username"><br>
+      Password : <br>
+      <input type="text" name="password" placeholder="Your password"><br>
+      Email    : <br>
+      <input type="text" name="email" placeholder="Your email"><br>
+      <br>
+      <input type="submit" value="Add User">
+    </form>
+  </body>
+</html>

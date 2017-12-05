@@ -2,6 +2,33 @@
 <html>
   <% include ./partials/head %>
   <body>
-
+    <h1>Users</h1>
+    <a href="/users/add">Add User</a>
+    <table border="1">
+      <tr>
+        <th>No</th>
+        <th>Id</th>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Email</th>
+        <th>Action</th>
+      </tr>
+      <% let count = 1 %>
+      <% dataUsers.forEach(function(user) {%>
+      <tr>
+        <td><%= count %></td>
+        <td><%= user.id %></td>
+        <td><%= user.username %></td>
+        <td><%= user.password %></td>
+        <td><%= user.email %></td>
+        <td>
+          <a href="/users/edit/<%= user.id %>">Edit</a>
+          | 
+          <a href="/users/delete/<%= user.id %>" onclick="return confirm(`Anda yakin ingin menghapusnya?`)">Delete</a>
+        </td>
+      </tr>
+      <% count++ %>
+      <%})%>
+    </table>
   </body>
 </html>
