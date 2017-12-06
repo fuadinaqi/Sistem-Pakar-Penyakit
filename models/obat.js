@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
     }
     ,
     implikasiObat: {
-      type: DataTypes.STRING
+      type: DataTypes.INTEGER
     }
   });
   Obat.associate = function (models) {

@@ -9,10 +9,12 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       namaObat: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       implikasiObat: {
-        type: Sequelize.STRING
+        allowNull: false,
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: true,

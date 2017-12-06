@@ -92,4 +92,11 @@ router.get('/delete/:id', function(req, res) {
     res.send(err)
   })
 })
+
+router.get('/abc', function(req, res) {
+  Model.User.hashPassword()
+  .then(function(tes) {
+    
+  })
+})
 module.exports = router
