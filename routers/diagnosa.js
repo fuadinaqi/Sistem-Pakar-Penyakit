@@ -4,6 +4,7 @@ const Model = require('../models')
 
 //home obat
 router.get('/', function (req, res) {
+    // res.send('masuk')
     Model.Diagnosa.findAll()
         .then(function (dataDiagnosas) {
             res.render('diagnosa', { dataDiagnosas: dataDiagnosas })
@@ -91,7 +92,7 @@ router.get('/assignObat/:id', function (req, res) {
                     res.render('assignObat', {
                         dataDiagnosa: dataDiagnosa,
                         dataObats: dataObats,
-                        error:null
+                        error: null
                     })
                 })
                 .catch(function (err) {
@@ -123,7 +124,7 @@ router.post('/assignObat/:id', function (req, res) {
                             res.render('assignObat', {
                                 dataDiagnosa: dataDiagnosa,
                                 dataObats: dataObats,
-                                error:err.message
+                                error: err.message
                             })
                         })
                         .catch(function (err) {

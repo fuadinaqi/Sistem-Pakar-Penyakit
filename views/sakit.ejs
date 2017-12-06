@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<% include ./partials/head %>
+
+    <body>
+        <form action="/diagnosas/listObat/1">
+            <select>
+                <%dataDiagnosas.forEach(function(row){%>
+                    <option value="<%=row.id%>">
+                        <%= row.namaPenyakit%>
+                    </option>
+                    <%})%>
+                        <br>
+                        <br>
+                        <input type="submit" value="submit">
+            </select>
+        </form>
+
+    </body>
+
+</html>

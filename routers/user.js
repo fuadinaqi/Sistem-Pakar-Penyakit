@@ -93,10 +93,10 @@ router.get('/delete/:id', function(req, res) {
   })
 })
 
-router.get('/abc', function(req, res) {
-  Model.User.hashPassword()
-  .then(function(tes) {
-
+router.get('/sakit',function(req,res){
+  Model.Diagnosa.findAll()
+  .then(function(dataDiagnosas){
+    res.render('sakit',{dataDiagnosas:dataDiagnosas})
   })
 })
 module.exports = router
