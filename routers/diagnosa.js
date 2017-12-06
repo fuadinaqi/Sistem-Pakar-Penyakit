@@ -91,6 +91,7 @@ router.get('/assignObat/:id', function (req, res) {
                     res.render('assignObat', {
                         dataDiagnosa: dataDiagnosa,
                         dataObats: dataObats,
+                        error:null
                     })
                 })
                 .catch(function (err) {
@@ -113,8 +114,27 @@ router.post('/assignObat/:id', function (req, res) {
             res.redirect('/diagnosas')
         })
         .catch(function (err) {
-            console.log(err);
-            res.send(err)
+            Model.Diagnosa.findOne({
+                where: { id: req.params.id }
+            })
+                .then(function (dataDiagnosa) {
+                    Model.Obat.findAll()
+                        .then(function (dataObats) {
+                            res.render('assignObat', {
+                                dataDiagnosa: dataDiagnosa,
+                                dataObats: dataObats,
+                                error:err.message
+                            })
+                        })
+                        .catch(function (err) {
+                            console.log(err);
+                            res.send(err)
+                        })
+                })
+                .catch(function (err) {
+                    console.log(err);
+                    res.send(err)
+                })
         })
 })
 // select * from namaTable where diagnosa like %panas%
