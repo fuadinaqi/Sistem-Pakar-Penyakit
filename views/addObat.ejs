@@ -8,7 +8,11 @@
             Nama Obat:<br>
             <input type="text" name="namaObat"><br>
             Implikasi Obat:<br>
-            <input type="number" name="implikasiObat">
+            <select name="implikasiObat">
+              <% dataObats.forEach(function(obat) {%>
+              <option value="<%= obat.id %>"><%= obat.namaObat %></option>
+              <% }) %>
+            </select>
             <input type="submit" value="Submit">
           </form>
           <br>

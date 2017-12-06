@@ -7,6 +7,11 @@ const Model = require('../models')
 router.get('/', function (req, res) {
     Model.Obat.findAll()
         .then(function (dataObats) {
+          if (dataObats.length == 0) {
+            res.render('obat', {
+              obat : dataObats
+            })
+          }
             let count = 0;
             dataObats.forEach(function(row){
                 Model.Obat.findOne({where:{id:row.implikasiObat}})
@@ -16,47 +21,43 @@ router.get('/', function (req, res) {
                         res.render('obat',{obat:dataObats})
                     }
                     count++
-            
+
                 })
-                
+
             })
         })
 })
 
-
-
-// router.get('/', function (req, res) {
-//     Model.Obat.findAll()
-//         .then(function (dataObats) {
-//             // Model.Obat.findById()
-//             res.render('obat', { obat: dataObats })
-//         })
-// })
 //add obat
 router.get('/add', function (req, res) {
+  Model.Obat.findAll()
+  .then(function(dataObats) {
     res.render('addObat', {
+      dataObats : dataObats,
         error: null
     })
+  })
 })
 
 router.post('/add', function (req, res) {
     // res.send('masuk ke post')
     let objObat = {
-        namaObat: req.body.namaObat.toLowerCase(),
-        implikasiObat: req.body.implikasiObat.toLowerCase()
+        namaObat      : req.body.namaObat.toLowerCase(),
+        implikasiObat : req.body.implikasiObat
     }
     Model.Obat.create(objObat)
         .then(function () {
-            // res.send('sukses')
             res.redirect('/obats')
         })
         .catch(function (err) {
-            // err = 'input tidak boleh kosong'
+          Model.Obat.findAll()
+          .then(function(dataObats) {
             res.render('addObat', {
-                error: err.message
+              dataObats : dataObats,
+                error: err.message,
             })
+          })
         })
-
 })
 //edit obat
 router.get('/edit/:id', function (req, res) {
