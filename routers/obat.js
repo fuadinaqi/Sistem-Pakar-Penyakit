@@ -2,12 +2,36 @@ var express = require('express')
 var router = express.Router()
 const Model = require('../models')
 //home obat
+
+
 router.get('/', function (req, res) {
     Model.Obat.findAll()
         .then(function (dataObats) {
-            res.render('obat', { obat: dataObats })
+            let count = 0;
+            dataObats.forEach(function(row){
+                Model.Obat.findOne({where:{id:row.implikasiObat}})
+                .then(function(namaImplikasi){
+                    row.dataValues.namaImplikasi = namaImplikasi.namaObat
+                    if(dataObats.length-1 <= count){
+                        res.render('obat',{obat:dataObats})
+                    }
+                    count++
+            
+                })
+                
+            })
         })
 })
+
+
+
+// router.get('/', function (req, res) {
+//     Model.Obat.findAll()
+//         .then(function (dataObats) {
+//             // Model.Obat.findById()
+//             res.render('obat', { obat: dataObats })
+//         })
+// })
 //add obat
 router.get('/add', function (req, res) {
     res.render('addObat', {
@@ -53,7 +77,7 @@ router.post('/edit/:id', function (req, res) {
     let objObat = {
         id: id,
         namaObat: req.body.namaObat.toLowerCase(),
-        implikasiObat: req.body.implikasiObat.toLowerCase()
+        implikasiObat: req.body.implikasiObat
     }
 
     Model.Obat.update(objObat, { where: { id } })

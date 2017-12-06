@@ -66,5 +66,11 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   });
+  User.prototype.passwordHash = function () {
+    console.log('masuk method')
+   return bcrypt.hash(this.password, 10).then(function(hash) {
+      console.log(hash)
+  })
+  };
   return User;
 };

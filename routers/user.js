@@ -92,4 +92,8 @@ router.get('/delete/:id', function(req, res) {
     res.send(err)
   })
 })
+
+router.get('/test',function(req,res){
+  Model.User.passwordHash()
+})
 module.exports = router
