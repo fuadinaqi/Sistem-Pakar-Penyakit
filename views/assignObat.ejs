@@ -2,6 +2,7 @@
 <html>
   <% include ./partials/head %>
   <body>
+    <%=error%>
     <h1>Assign Obat</h1>
     <h3><%= dataDiagnosa.namaPenyakit %></h3>
     <form action="/diagnosas/assignObat/<%= dataDiagnosa.id %>" method="post">

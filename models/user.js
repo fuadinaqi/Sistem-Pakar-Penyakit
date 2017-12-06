@@ -2,8 +2,8 @@
 module.exports = (sequelize, DataTypes) => {
   var User = sequelize.define('User', {
     username: {
-      type      : DataTypes.STRING,
-      validate  : {
+      type: DataTypes.STRING,
+      validate: {
         isNull(value, next) {
           if (value.length == 0) {
             next(`username tidak boleh kosong`)
@@ -11,31 +11,31 @@ module.exports = (sequelize, DataTypes) => {
             next()
           }
         },
-        isUnique : function(value, next) {
+        isUnique: function (value, next) {
           User.findAll({
-            where :
-            {
-              username : value.toLowerCase(),
-              id : {[sequelize.Op.ne] : this.id}
-            }
+            where:
+              {
+                username: value.toLowerCase(),
+                id: { [sequelize.Op.ne]: this.id }
+              }
           })
-          .then((data) => {
-            if (data == null || data.length == 0) {
-              return next()
-            } else {
-              return next(`username ${data[0].username} sudah digunakan`)
-            }
-          })
-          .catch((err) => {
-            return next(err)
-          })
+            .then((data) => {
+              if (data == null || data.length == 0) {
+                return next()
+              } else {
+                return next(`username ${data[0].username} sudah digunakan`)
+              }
+            })
+            .catch((err) => {
+              return next(err)
+            })
         }
       }
     },
     password: DataTypes.STRING,
     email: {
-      type  : DataTypes.STRING,
-      validate  : {
+      type: DataTypes.STRING,
+      validate: {
         isNull(value, next) {
           if (value.length == 0) {
             next(`email tidak boleh kosong`)
@@ -43,24 +43,24 @@ module.exports = (sequelize, DataTypes) => {
             next()
           }
         },
-        isUnique : function(value, next) {
+        isUnique: function (value, next) {
           User.findAll({
-            where :
-            {
-              email : value.toLowerCase(),
-              id : {[sequelize.Op.ne] : this.id}
-            }
+            where:
+              {
+                email: value.toLowerCase(),
+                id: { [sequelize.Op.ne]: this.id }
+              }
           })
-          .then((data) => {
-            if (data == null || data.length == 0) {
-              return next()
-            } else {
-              return next(`email ${data[0].email} sudah digunakan`)
-            }
-          })
-          .catch((err) => {
-            return next(err)
-          })
+            .then((data) => {
+              if (data == null || data.length == 0) {
+                return next()
+              } else {
+                return next(`email ${data[0].email} sudah digunakan`)
+              }
+            })
+            .catch((err) => {
+              return next(err)
+            })
         }
       }
     }
