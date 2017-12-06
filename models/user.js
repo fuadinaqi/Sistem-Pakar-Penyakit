@@ -64,12 +64,19 @@ module.exports = (sequelize, DataTypes) => {
             })
         }
       }
-    }
+    },
+    role : DataTypes.STRING
   });
-  User.prototype.hashPassword = function () {
-    bcrypt.hash('123456', 10).then(function(hash) {
-      console.log(hash);
-    });
-  };
+  User.beforeCreate(function (user, options) {
+    return bcrypt.hash(user.password, 10)
+      .then(function (hash) {
+        user.password = hash
+      })
+  });
+  User.prototype.compare_password = function (plain_password, cb) {
+    bcrypt.compare(plain_password, this.password).then(function (res) {
+      cb(res)
+    })
+  }
   return User;
 };
