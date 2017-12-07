@@ -67,7 +67,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     role : DataTypes.STRING
   });
-  User.beforeCreate(function (user, options) {
+  User.beforeCreate(function (user, options) { //direct method hook
     return bcrypt.hash(user.password, 10)
       .then(function (hash) {
         user.password = hash

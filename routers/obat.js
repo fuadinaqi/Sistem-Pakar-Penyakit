@@ -5,6 +5,7 @@ const Model = require('../models')
 
 
 router.get('/', function (req, res) {
+    console.log('obats')
     Model.Obat.findAll()
         .then(function (dataObats) {
           if (dataObats.length == 0) {
@@ -31,6 +32,8 @@ router.get('/', function (req, res) {
                 })
 
             })
+        }).catch(function (err) {
+            res.send(err)
         })
 })
 

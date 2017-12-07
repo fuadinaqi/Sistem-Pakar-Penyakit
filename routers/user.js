@@ -22,6 +22,7 @@ router.post('/add', function(req, res) {
     username : req.body.username.toLowerCase(),
     password : req.body.password,
     email    : req.body.email.toLowerCase(),
+    role : req.body.role.toLowerCase()
   }
   Model.User.create(objCreate)
   .then(function() {

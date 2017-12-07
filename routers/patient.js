@@ -75,4 +75,11 @@ router.post('/sakit/:id/obat', function(req, res) {
   }
 })
 
+router.get('/sakit', function(req, res) {
+  Model.Diagnosa.findAll()
+  .then(function(dataPenyakits) {
+    // res.render('')
+  })
+})
+
 module.exports = router;

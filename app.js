@@ -17,13 +17,41 @@ app.use(session({
 
 
 const User = require('./routers/user')
+const Signup = require('./routers/signup')
 const Obat = require('./routers/obat')
 const Diagnosa = require('./routers/diagnosa')
 const Patient = require('./routers/patient');
 
+// app.get('/signup',function(req,res){
+//     res.render('login',{
+//         err : null
+//     })
+// })
+// app.post('/signup', function (req, res) {
+//     // res.send('masuk sini')
+//     let objCreate = {
+//         username: req.body.username.toLowerCase(),
+//         password: req.body.password,
+//         email: req.body.email.toLowerCase(),
+//         role : req.body.role
+//     }
+//     // res.send(objCreate)
+//     Model.User.create(objCreate)
+//         .then(function () {
+//             res.redirect('/login')
+//         })
+//         .catch(function (err) {
+//             console.log(err);
+//             res.render('login', {
+//                 err: err.message,
+//             })
+//         })
+// })
 
 app.get('/login', (req, res) => {
-    res.render('login')
+    res.render('login',{
+        err: null
+    })
 })
 
 app.post('/login', function (req, res) {
@@ -69,16 +97,17 @@ app.get('/', authHelper.cekLoginHandler, function (req, res) {
     res.render('home')
 })
 
-app.get('/pasien', function (req, res) {
-    res.send('pasien')
+app.get('/pasien', authHelper.cekLoginHandler, function (req, res) {
+    res.render('pasien')
 })
 
+app.use('/users', authHelper.cekLoginHandler, User)
+app.use('/obats', authHelper.cekLoginHandler, Obat)
+app.use('/diagnosas', authHelper.cekLoginHandler, Diagnosa)
+app.use('/signup',Signup)
 app.use('/patients', Patient)
-app.use('/users', User)
-app.use('/obats', Obat)
-app.use('/diagnosas', Diagnosa) //OSAS
 
-app.listen(4000, console.log('ALIVE'))
+app.listen(3000, console.log('ALIVE'))
 
 
 
