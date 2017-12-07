@@ -23,6 +23,12 @@ router.get('/', function (req, res) {
                     count++
 
                 })
+                .catch(function (err) {
+                  count++
+                  if (count >= dataObats.length) {
+                    res.render('obat',{obat:dataObats})
+                  }
+                })
 
             })
         })
@@ -63,13 +69,24 @@ router.post('/add', function (req, res) {
 router.get('/edit/:id', function (req, res) {
     let id = req.params.id
 
-    Model.Obat.findById(id).then(function (dataObat) {
+    Model.Obat.findAll()
+    .then(function(dataObats) {
+      Model.Obat.findById(id).then(function (dataObat) {
         // res.send(dataObat)
         res.render('editObat', {
-            error: null,
-            obat: dataObat,
+          dataObats : dataObats,
+          obat      : dataObat,
+          error     : null
         })
+      })
     })
+    // Model.Obat.findById(id).then(function (dataObat) {
+    //     // res.send(dataObat)
+    //     res.render('editObat', {
+    //         error: null,
+    //         obat: dataObat,
+    //     })
+    // })
 })
 
 router.post('/edit/:id', function (req, res) {
@@ -80,22 +97,43 @@ router.post('/edit/:id', function (req, res) {
         namaObat: req.body.namaObat.toLowerCase(),
         implikasiObat: req.body.implikasiObat
     }
+    if (objObat.id == objObat.implikasiObat) {
+      let id = req.params.id
 
-    Model.Obat.update(objObat, { where: { id } })
-        .then(function () {
-            res.redirect('/obats')
+      Model.Obat.findAll()
+      .then(function(dataObats) {
+        Model.Obat.findById(id).then(function (dataObat) {
+          // res.send(dataObat)
+          res.render('editObat', {
+            dataObats : dataObats,
+            obat      : dataObat,
+            error     : 'obat implikasi tidak boleh sama dengan obat utama'
+          })
         })
-        .catch(function (err) {
-            console.log(err)
+      })
+    } else {
+      Model.Obat.update(objObat, { where: { id } })
+          .then(function () {
+              res.redirect('/obats')
+          })
+          .catch(function (err) {
+              console.log(err)
 
-            Model.Obat.findById(id).then(function (dataObat) {
-                // res.send(dataObat)
-                res.render('editObat', {
-                    error: err.message,
-                    obat: dataObat,
+              let id = req.params.id
+
+              Model.Obat.findAll()
+              .then(function(dataObats) {
+                Model.Obat.findById(id).then(function (dataObat) {
+                  // res.send(dataObat)
+                  res.render('editObat', {
+                    dataObats : dataObats,
+                    obat      : dataObat,
+                    error     : err.message,
+                  })
                 })
-            })
-        })
+              })
+          })
+    }
 })
 
 router.get('/delete/:id', function (req, res) {

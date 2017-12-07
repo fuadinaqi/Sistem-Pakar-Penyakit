@@ -19,6 +19,7 @@ app.use(session({
 const User = require('./routers/user')
 const Obat = require('./routers/obat')
 const Diagnosa = require('./routers/diagnosa')
+const Patient = require('./routers/patient');
 
 
 app.get('/login', (req, res) => {
@@ -72,6 +73,7 @@ app.get('/pasien', function (req, res) {
     res.send('pasien')
 })
 
+app.use('/patients', Patient)
 app.use('/users', User)
 app.use('/obats', Obat)
 app.use('/diagnosas', Diagnosa) //OSAS

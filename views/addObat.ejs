@@ -9,6 +9,7 @@
             <input type="text" name="namaObat"><br>
             Implikasi Obat:<br>
             <select name="implikasiObat">
+              <option value="0">TIDAK ADA</option>
               <% dataObats.forEach(function(obat) {%>
               <option value="<%= obat.id %>"><%= obat.namaObat %></option>
               <% }) %>

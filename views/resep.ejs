@@ -4,7 +4,7 @@
   <body>
     <h1>Penyakit <%= dataDiagnosa.namaPenyakit %></h1>
     <h2>Silahkan Pilih Obat</h2>
-    <form action="/diagnosas/sakit/<%= dataDiagnosa.id %>/obat" method="post">
+    <form action="/patients/sakit/<%= dataDiagnosa.id %>/obat" method="post">
       <% dataDiagnosa.Obats.forEach(function(obat) {  %>
         <input type="checkbox" name="listObat" value="<%= obat.id %>"><%= obat.namaObat %><br>
       <% }) %>

@@ -1,6 +1,7 @@
 var express = require('express')
 var router = express.Router()
 const Model = require('../models')
+const authHelper = require('../helpers/authHelper');
 // const Op = Sequelize.Op;
 
 //home obat
@@ -175,7 +176,10 @@ router.post('/sakit/:id/obat', function(req, res) {
         id : {
           [Model.sequelize.Op.in]: arrListObat
         },
-      }, include : [Model.Diagnosa],
+      }, include : [{
+        model : Model.Diagnosa,
+        where : {id : req.params.id}
+      }],
         order : [['id', 'ASC']]
     })
     .then(obats => {
@@ -197,7 +201,6 @@ router.post('/sakit/:id/obat', function(req, res) {
         } else {
           count++
           if (count >= obats.length) {
-            res.send(obats)
             res.render('reportObat', {
               obats : obats,
             })
@@ -206,8 +209,18 @@ router.post('/sakit/:id/obat', function(req, res) {
       })
     })
   } else if(arrListObat.length == 1) {
-    Model.Obat.findById(req.body.listObat)
+    Model.Obat.findAll({
+      where : {
+        id : req.params.id,
+      }, include : [{
+        model : Model.Diagnosa,
+        where : {id : req.params.id}
+      }],
+        order : [['id', 'ASC']]
+    })
     .then(function (obats) {
+      // res.send(obats)
+      console.log();
       res.render('reportObat', {
         obats : obats
       })

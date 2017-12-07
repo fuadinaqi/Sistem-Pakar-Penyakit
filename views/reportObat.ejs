@@ -1,7 +1,19 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <h1>report obat</h1>
-    <p><%= obats %></p>
+    <h1>Hasil Pilihan Obat</h1>
+    <h3>Untuk anda yang terjangkit penyakit <%= obats[0].Diagnosas[0].namaPenyakit %>
+    pilihan obat anda : </h3>
+    <p></p>
+    <ol>
+      <% obats.forEach(function(obat) { %>
+        <li><%= obat.namaObat %></li>
+      <%})%>
+    </ol>
+    <%if(obats.length > 1) {%>
+      <h3>Obat-obat ini tidak terimplikasi satu sama lain</h3>
+    <%}%>
+    <h3>Semoga lekas sembuh</h3>
+    <a href="/patients/sakit/<%= obats[0].Diagnosas[0].id %>/obat">back</a>
   </body>
 </html>
