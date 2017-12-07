@@ -43,7 +43,7 @@ router.get('/add', function (req, res) {
   .then(function(dataObats) {
     res.render('addObat', {
       dataObats : dataObats,
-        error: null
+        err: null
     })
   })
 })
@@ -63,7 +63,7 @@ router.post('/add', function (req, res) {
           .then(function(dataObats) {
             res.render('addObat', {
               dataObats : dataObats,
-                error: err.message,
+                err: err.message,
             })
           })
         })
@@ -79,7 +79,7 @@ router.get('/edit/:id', function (req, res) {
         res.render('editObat', {
           dataObats : dataObats,
           obat      : dataObat,
-          error     : null
+          err     : null
         })
       })
     })
@@ -110,7 +110,7 @@ router.post('/edit/:id', function (req, res) {
           res.render('editObat', {
             dataObats : dataObats,
             obat      : dataObat,
-            error     : 'obat implikasi tidak boleh sama dengan obat utama'
+            err     : 'obat implikasi tidak boleh sama dengan obat utama'
           })
         })
       })
@@ -131,7 +131,7 @@ router.post('/edit/:id', function (req, res) {
                   res.render('editObat', {
                     dataObats : dataObats,
                     obat      : dataObat,
-                    error     : err.message,
+                    err     : err.message,
                   })
                 })
               })

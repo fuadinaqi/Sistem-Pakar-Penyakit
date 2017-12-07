@@ -2,13 +2,15 @@
 <html>
   <% include ./partials/head %>
   <body>
+    <% include ./partials/navigation %>
+    
     <h1>Edit Diagnosa</h1>
-    <h3><%= err %></h3>
+    <% include ./partials/error %>
     <form action="/diagnosas/edit/<%= dataDiagnosa.id %>" method="post">
       Nama Penyakit : <br>
-      <input type="text" name="namaPenyakit" value="<%= dataDiagnosa.namaPenyakit %>"><br>
+      <input class="form-control" type="text" name="namaPenyakit" value="<%= dataDiagnosa.namaPenyakit %>"><br>
       <br>
-      <input type="submit" name="" value="Edit Diagnosa">
+      <input class="btn btn-primary" type="submit" name="" value="Edit Diagnosa">
     </form>
     <br>
     <a href="/diagnosas">back</a>

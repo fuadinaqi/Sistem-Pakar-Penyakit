@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html>
+<% include ./partials/head %>
+<div class="container-fluid">
   <body>
     <h1>Hasil Pilihan Obat</h1>
     <h3>Untuk anda yang terjangkit penyakit <%= obats[0].Diagnosas[0].namaPenyakit %>
@@ -16,4 +18,5 @@
     <h3>Semoga lekas sembuh</h3>
     <a href="/patients/sakit/<%= obats[0].Diagnosas[0].id %>/obat">back</a>
   </body>
+</div>
 </html>

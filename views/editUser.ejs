@@ -2,17 +2,21 @@
 <html>
   <% include ./partials/head %>
   <body>
+    
+    <% include ./partials/navigation %>
     <h1>Edit User</h1>
-    <h3><%= err %></h3>
+    <% include ./partials/error %>
     <form action="/users/edit/<%= dataUser.id %>" method="post">
       Username : <br>
-      <input type="text" name="username" value="<%= dataUser.username %>"><br>
+      <input class="form-control" type="text" name="username" value="<%= dataUser.username %>"><br>
       Password : <br>
-      <input type="text" name="password" value=""><br>
+      <input class="form-control" type="password" name="password" value=""><br>
       Email    : <br>
-      <input type="text" name="email" value="<%= dataUser.email %>"><br>
+      <input class="form-control" type="text" name="email" value="<%= dataUser.email %>"><br>
+      Role     : <br>
+      <input class="form-control" type="text" name="role" value="<%= dataUser.role %>"><br>
       <br>
-      <input type="submit" name="" value="Edit User">
+      <input class="btn btn-primary" type="submit" name="" value="Edit User">
     </form>
     <br>
     <a href="/users">back</a>

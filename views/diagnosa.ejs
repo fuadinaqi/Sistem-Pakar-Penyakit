@@ -3,14 +3,17 @@
 <% include ./partials/head %>
 
   <body>
+    <% include ./partials/navigation %>
     <h1>Diagnosa</h1>
     <a href="/diagnosas/add">Add Diagnosa </a>
-    <table border="1">
+    <table class="table">
+      <thead class="thead-dark">
       <tr>
         <th>No</th>
         <th>Nama Penyakit</th>
         <th>Action</th>
       </tr>
+    </thead>
 
       <% let count = 1 %>
         <% dataDiagnosas.forEach(function(diagnosa) { %>

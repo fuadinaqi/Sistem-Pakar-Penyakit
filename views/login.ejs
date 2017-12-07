@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html>
-<h1>Welcome to Medicine's Expert System</h1>
+<% include ./partials/head %>
+<div class="container-fluid">
 <body>
-  <%=err%>
+  <h1>Welcome to Medicine's Expert System</h1>
+  <% include ./partials/error %>
     <h3>Insert Username and Password</h3>
-
     <form action="/login" method="post">
-      <input type="text" name="username" placeholder="Username"><br><br>
-      <input type="password" name="password" placeholder="Password"><br>
       <br>
-      <input type="submit" value="Login">
+      <input class="form-control" type="text" name="username" placeholder="Username"><br>
+      <input class="form-control" type="password" name="password" placeholder="Password"><br>
+      <br>
+      <input class="btn btn-primary" type="submit" value="Login">
     </form>
     <br>
     <p>Don't have an Account?</p>
     <a href="/signup">Sign Up</a>
 </body>
+</div>
 
 </html>

@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
+<% include ./partials/head %>
+<div class="container-fluid">
   <body>
+
     <h1>Terindikasi implikasi Obat!</h1>
     <h3>Untuk anda yang terjangkit penyakit <%= obats[0].Diagnosas[0].namaPenyakit %>
     pilihan obat anda : </h3>
@@ -15,6 +18,8 @@
       <h4>obat <%= obat.namaObat %> terimplikasi dengan obat <%= obat.dataValues.namaImplikasi %></h4>
       <%}%>
     <%})%>
-    <a href="/patients/sakit/<%= obats[0].Diagnosas[0].id %>/obat">back</a>
+    <h5>Silahkan memilih <a href="/patients/sakit/<%= obats[0].Diagnosas[0].id %>/obat">ulang</a> obat yang tidak terimplikasi </h5>
+
   </body>
+</div>
 </html>

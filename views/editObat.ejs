@@ -2,20 +2,22 @@
 <html>
   <% include ./partials/head %>
   <body>
-    <%=error%>
-    <h1>edit obat</h1>
+    <% include ./partials/navigation %>
+    <h1>Edit Obat</h1>
+    <% include ./partials/error %>
+    
     <form action="/obats/edit/<%=obat.id%>" method="post">
             Nama Obat:<br>
-            <input type="text" name="namaObat" value="<%= obat.namaObat%>"> <br>
+            <input class="form-control" type="text" name="namaObat" value="<%= obat.namaObat%>"> <br>
             Implikasi Obat:<br>
-            <select name="implikasiObat">
+            <select class="form-control" name="implikasiObat">
               <option value="0">TIDAK ADA</option>
               <% dataObats.forEach(function(row) {%>
               <option value="<%= row.id %>"><%= row.namaObat %></option>
               <% }) %>
             </select>
 
-            <input type="submit" value="Submit">
+            <input class="btn btn-primary" type="submit" value="Submit">
           </form>
           <br>
           <a href="/obats">back</a>

@@ -2,17 +2,19 @@
 <html>
   <% include ./partials/head %>
   <body>
-    <%=error%>
+    <% include ./partials/navigation %>
     <h1>Assign Obat</h1>
+    <% include ./partials/error %>
     <h3><%= dataDiagnosa.namaPenyakit %></h3>
+    
     <form action="/diagnosas/assignObat/<%= dataDiagnosa.id %>" method="post">
       Pilihan Obat : <br>
-      <select name="ObatId">
+      <select class="form-control" name="ObatId">
         <% dataObats.forEach(function(obat) { %>
         <option value="<%= obat.id %>"><%= obat.namaObat %></option>
         <% }) %>
       </select><br><br>
-      <input type="submit" value="Assign Obat">
+      <input class="btn btn-primary" type="submit" value="Assign Obat">
     </form>
     <br>
     <a href="/diagnosas">back</a>

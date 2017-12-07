@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Diseases Expert System</title>
-  </head>
+  <% include ./partials/head %>
+  <div class="container-fluid">
   <body>
-    <a href="/patients/logout" onclick="return confirm(`Apakah anda yakin ingin keluar?`)">Logout</a>
+
+    <a href="/patients/logout" onclick="return confirm(`Apakah anda yakin ingin keluar?`)">Logout</a><br>
     <form action="/patients/sakit" method="post">
+      <br>
       Daftar Penyakit : <br>
-      <select name="id">
+      <select class="form-control" name="id">
         <% dataPenyakits.forEach(function(penyakit) { %>
           <option value="<%= penyakit.id %>"><%= penyakit.namaPenyakit %></option>
         <%})%>
-        <input type="submit" name="" value="submit">
+
+
       </select>
+      <br>
+      <input class="btn btn-primary" type="submit" name="" value="submit">
     </form>
   </body>
+</div>
 </html>

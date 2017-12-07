@@ -3,25 +3,31 @@
 <% include ./partials/head %>
 
     <body>
+      <% include ./partials/navigation %>
         <h1>
             <%= dataConjunction.namaPenyakit%>
         </h1>
-        <table border="1">
+
+
+        <table class="table">
+          <thead class="thead-dark">
             <tr>
                 <th>no</th>
                 <th>nama obat</th>
             </tr>
+            </thead>
             <%let count = 1%>
             <%dataConjunction.Obats.forEach(function(rowObat){%>
                 <tr>
 
-                    <th><%=count%></th>
-                    <th>
+                    <td><%=count%></td>
+                    <td>
                         <%=rowObat.namaObat %>
-                    </th>
+                    </td>
                     <%count++%>
                 </tr>
                 <%})%>
+
         </table>
         <br>
         <a href="/diagnosas">back</a>

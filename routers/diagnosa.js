@@ -94,7 +94,7 @@ router.get('/assignObat/:id', function (req, res) {
                     res.render('assignObat', {
                         dataDiagnosa: dataDiagnosa,
                         dataObats: dataObats,
-                        error: null
+                        err: null
                     })
                 })
                 .catch(function (err) {
@@ -126,7 +126,7 @@ router.post('/assignObat/:id', function (req, res) {
                             res.render('assignObat', {
                                 dataDiagnosa: dataDiagnosa,
                                 dataObats: dataObats,
-                                error: err.message
+                                err: err.message
                             })
                         })
                         .catch(function (err) {

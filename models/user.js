@@ -33,7 +33,18 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    password: DataTypes.STRING,
+    password: {
+      type: DataTypes.STRING,
+      validate : {
+        isNull(value, next) {
+          if (value.length == 0) {
+            next(`password tidak boleh kosong`)
+          } else {
+            next()
+          }
+        }
+      }
+    },
     email: {
       type: DataTypes.STRING,
       validate: {

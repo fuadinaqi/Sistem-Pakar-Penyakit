@@ -55,6 +55,7 @@ router.post('/edit/:id', function(req, res) {
     username : req.body.username.toLowerCase(),
     password : req.body.password,
     email    : req.body.email.toLowerCase(),
+    role     : req.body.role,
   }
   Model.User.update(objUpdate, {
     where : {
