@@ -63,16 +63,19 @@ app.post('/login', function (req, res) {
         .then(function (user) {
             user.compare_password(req.body.password, function (result) {
                 if (result) {
-                    req.session.isLogin = true
+                    
                     if (user.role == 'pasien') {
+                        req.session.isLogin = true
                         res.redirect('/patients/sakit')
-                    } else {
+                    } else if(user.role == 'admin'){
+                        req.session.isLoginA = true 
                         res.redirect('/')
                     }
 
 
                 } else {
                     req.session.isLogin = false
+                    req.session.isLoginA = false                    
                     res.redirect('/login')
                 }
             })

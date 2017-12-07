@@ -90,7 +90,7 @@ router.post('/sakit', function(req, res) {
   res.redirect(`/patients/sakit/${idSakit}/obat`)
 })
 
-router.get('/logout', authHelper.cekLoginHandler, function (req, res) {
+router.get('/logout', authHelper.cekLoginPatient, function (req, res) {
     req.session.destroy(function (err) {
         if (!err) {
             res.redirect('/')
