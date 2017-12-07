@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Diseases Expert System</title>
+  </head>
+  <body>
+    <a href="/patients/logout" onclick="return confirm(`Apakah anda yakin ingin keluar?`)">Logout</a>
+    <form action="/patients/sakit" method="post">
+      Daftar Penyakit : <br>
+      <select name="id">
+        <% dataPenyakits.forEach(function(penyakit) { %>
+          <option value="<%= penyakit.id %>"><%= penyakit.namaPenyakit %></option>
+        <%})%>
+        <input type="submit" name="" value="submit">
+      </select>
+    </form>
+  </body>
+</html>

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router()
 const Model = require('../models');
+const authHelper = require('../helpers/authHelper');
 
 router.get('/sakit/:id/obat', function(req, res) {
   Model.Diagnosa.findById(req.params.id, {
@@ -78,8 +79,25 @@ router.post('/sakit/:id/obat', function(req, res) {
 router.get('/sakit', function(req, res) {
   Model.Diagnosa.findAll()
   .then(function(dataPenyakits) {
-    // res.render('')
+    res.render('sick', {
+      dataPenyakits : dataPenyakits,
+    })
   })
+})
+
+router.post('/sakit', function(req, res) {
+  let idSakit = req.body.id
+  res.redirect(`/patients/sakit/${idSakit}/obat`)
+})
+
+router.get('/logout', authHelper.cekLoginHandler, function (req, res) {
+    req.session.destroy(function (err) {
+        if (!err) {
+            res.redirect('/')
+        } else {
+            res.send(err)
+        }
+    })
 })
 
 module.exports = router;

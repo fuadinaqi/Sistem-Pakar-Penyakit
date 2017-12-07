@@ -65,7 +65,7 @@ app.post('/login', function (req, res) {
                 if (result) {
                     req.session.isLogin = true
                     if (user.role == 'pasien') {
-                        res.redirect('/pasien')
+                        res.redirect('/patients/sakit')
                     } else {
                         res.redirect('/')
                     }
@@ -97,15 +97,12 @@ app.get('/', authHelper.cekLoginHandler, function (req, res) {
     res.render('home')
 })
 
-app.get('/pasien', authHelper.cekLoginHandler, function (req, res) {
-    res.render('pasien')
-})
-
 app.use('/users', authHelper.cekLoginHandler, User)
 app.use('/obats', authHelper.cekLoginHandler, Obat)
 app.use('/diagnosas', authHelper.cekLoginHandler, Diagnosa)
 app.use('/signup',Signup)
-app.use('/patients', Patient)
+app.use('/patients', authHelper.cekLoginPatient, Patient)
+
 
 app.listen(3000, console.log('ALIVE'))
 

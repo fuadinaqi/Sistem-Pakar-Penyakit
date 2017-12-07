@@ -8,6 +8,17 @@ function cekLoginHandler(req, res, next) {
     }
 }
 
+function cekLoginPatient(req, res, next) {
+    let isLoginP = req.session.isLogin
+    // let isLogin = true
+    if (isLoginP) {
+        next()
+    } else {
+        res.redirect('/login')
+    }
+}
+
 module.exports = {
-    cekLoginHandler: cekLoginHandler
+    cekLoginHandler: cekLoginHandler,
+    cekLoginPatient: cekLoginPatient,
 }
