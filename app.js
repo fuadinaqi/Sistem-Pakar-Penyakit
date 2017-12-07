@@ -107,4 +107,5 @@ app.use('/signup',Signup)
 app.use('/patients', authHelper.cekLoginPatient, Patient)
 
 
-app.listen(3000, console.log('ALIVE'))
+// app.listen(3000, console.log('ALIVE'))
+app.listen(process.env.PORT || '3000')
