@@ -10,6 +10,16 @@ module.exports = {
       namaPenyakit: 'Migrain',
     }, {
       namaPenyakit: 'Pilek',
+    }, {
+      namaPenyakit: 'Diare',
+    }, {
+      namaPenyakit: 'Muntaber',
+    }, {
+      namaPenyakit: 'Insomnia',
+    }, {
+      namaPenyakit: 'Kangen Dia',
+    }, {
+      namaPenyakit: 'Demam final Live Code',
     }]);
   },
 
@@ -22,6 +32,16 @@ module.exports = {
       namaPenyakit: 'Migrain',
     }, {
       namaPenyakit: 'Pilek',
+    }, {
+      namaPenyakit: 'Diare',
+    }, {
+      namaPenyakit: 'Muntaber',
+    }, {
+      namaPenyakit: 'Insomnia',
+    }, {
+      namaPenyakit: 'Kangen Dia',
+    }, {
+      namaPenyakit: 'Demam final Live Code',
     }]);
   }
 };

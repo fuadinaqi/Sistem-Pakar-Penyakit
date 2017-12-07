@@ -3,33 +3,39 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Users', [{
-      username: 'fuadinaqi',
-      password: 'implikasi123',
-      email   : 'fuadinaqi@gmail.com'
+      username: 'fuadi',
+      password: '1234',
+      email   : 'fuadinaqi@gmail.com',
+      role    : 'admin'
     }, {
-      username: 'hafizhabdillah',
-      password: 'diagnosa123',
+      username: 'apis',
+      password: '1234',
       email   : 'hafizhabdillah@gmail.com',
+      role    : 'admin'
     }, {
-      username: 'dhaniluthfi',
-      password: 'obat123',
+      username: 'dani',
+      password: '1234',
       email   : 'dhaniluthfi@gmail.com',
-    },]);
+      role    : 'pasien'
+    }])
   },
 
   down: (queryInterface, Sequelize) => {
     return queryInterface.bulkDelete('Users', [{
-      username: 'fuadinaqi',
-      password: 'implikasi123',
-      email   : 'fuadinaqi@gmail.com'
+      username: 'fuadi',
+      password: '1234',
+      email   : 'fuadinaqi@gmail.com',
+      role    : 'admin'
     }, {
-      username: 'hafizhabdillah',
-      password: 'diagnosa123',
+      username: 'apis',
+      password: '1234',
       email   : 'hafizhabdillah@gmail.com',
+      role    : 'admin'
     }, {
-      username: 'dhaniluthfi',
-      password: 'obat123',
+      username: 'dani',
+      password: '1234',
       email   : 'dhaniluthfi@gmail.com',
-    },]);
+      role    : 'pasien'
+    }])
   }
 };

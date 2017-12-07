@@ -11,6 +11,7 @@
         <th>Username</th>
         <th>Password</th>
         <th>Email</th>
+        <th>Role</th>
         <th>Action</th>
       </tr>
       <% let count = 1 %>
@@ -21,9 +22,10 @@
         <td><%= user.username %></td>
         <td><%= user.password %></td>
         <td><%= user.email %></td>
+        <td><%= user.role %></td>
         <td>
           <a href="/users/edit/<%= user.id %>">Edit</a>
-          | 
+          |
           <a href="/users/delete/<%= user.id %>" onclick="return confirm(`Anda yakin ingin menghapusnya?`)">Delete</a>
         </td>
       </tr>

@@ -10,12 +10,14 @@ router.get('/sakit/:id/obat', function(req, res) {
   .then(function(dataDiagnosa) {
     res.render('resep', {
       dataDiagnosa : dataDiagnosa,
+      err          : null,
     })
   })
 })
 
 router.post('/sakit/:id/obat', function(req, res) {
   let arrListObat = req.body.listObat
+  console.log(arrListObat);
   if (typeof(arrListObat) == 'object') {
     Model.Obat.findAll({
       where : {
@@ -53,7 +55,18 @@ router.post('/sakit/:id/obat', function(req, res) {
         }
       })
     })
+  } else if(arrListObat == undefined){
+    Model.Diagnosa.findById(req.params.id, {
+      include : [Model.Obat]
+    })
+    .then(function(dataDiagnosa) {
+      res.render('resep', {
+        dataDiagnosa : dataDiagnosa,
+        err          : 'Mohon pilih salah satu obat yang kami rekomendasikan',
+      })
+    })
   } else {
+    // console.log(arrListObat);
     console.log('Masukkkk');
     Model.Obat.findAll({
       where : {

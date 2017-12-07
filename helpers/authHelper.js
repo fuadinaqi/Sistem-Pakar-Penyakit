@@ -10,14 +10,14 @@ function cekLoginHandler(req, res, next) {
         } else {
             res.redirect('/login')
         }
-        
+
     }
 }
 
 function cekLoginPatient(req, res, next) {
     let isLoginP = req.session.isLogin
     // console.log('ini helper pasien',isLoginP )
-    // let isLogin = true
+    // let isLoginP = true
     if (isLoginP) {
         next()
     } else {

@@ -5,7 +5,6 @@ const session = require('express-session')
 const bodyParser = require('body-parser')
 const authHelper = require('./helpers/authHelper')
 
-
 app.set('view engine', 'ejs')
 app.set('views', './views')
 
@@ -63,19 +62,20 @@ app.post('/login', function (req, res) {
         .then(function (user) {
             user.compare_password(req.body.password, function (result) {
                 if (result) {
-                    
+
                     if (user.role == 'pasien') {
                         req.session.isLogin = true
                         res.redirect('/patients/sakit')
                     } else if(user.role == 'admin'){
-                        req.session.isLoginA = true 
+                        req.session.isLoginA = true
+                        req.session.isLogin = true
                         res.redirect('/')
                     }
 
 
                 } else {
                     req.session.isLogin = false
-                    req.session.isLoginA = false                    
+                    req.session.isLoginA = false
                     res.redirect('/login')
                 }
             })
@@ -108,15 +108,3 @@ app.use('/patients', authHelper.cekLoginPatient, Patient)
 
 
 app.listen(3000, console.log('ALIVE'))
-
-
-
-
-/*
- - router buat pasien belum
- - form sign up di tampilan depan
-
-
-
-
-*/

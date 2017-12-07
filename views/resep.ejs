@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
-
+  <nav>
+    <a href="/patients/sakit">back</a>
+  </nav>
   <body>
+    <h2><%= err %></h2>
     <h1>Penyakit <%= dataDiagnosa.namaPenyakit %></h1>
     <h2>Silahkan Pilih Obat</h2>
     <form action="/patients/sakit/<%= dataDiagnosa.id %>/obat" method="post">

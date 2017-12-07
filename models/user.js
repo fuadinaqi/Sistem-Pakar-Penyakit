@@ -67,6 +67,13 @@ module.exports = (sequelize, DataTypes) => {
     },
     role : DataTypes.STRING
   });
+  User.beforeBulkUpdate(function (user, options) { //direct method hook
+    return bcrypt.hash(user.attributes.password, 10)
+      .then(function (hash) {
+        user.attributes.password = hash
+      })
+  });
+
   User.beforeCreate(function (user, options) { //direct method hook
     return bcrypt.hash(user.password, 10)
       .then(function (hash) {
