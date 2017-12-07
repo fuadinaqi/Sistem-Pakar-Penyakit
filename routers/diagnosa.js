@@ -1,6 +1,7 @@
 var express = require('express')
 var router = express.Router()
 const Model = require('../models')
+// const Op = Sequelize.Op;
 
 //home obat
 router.get('/', function (req, res) {
@@ -153,5 +154,116 @@ router.get('/listObat/:id', function (req, res) {
         res.send(err)
     })
 })
+
+router.get('/sakit/:id/obat', function(req, res) {
+  Model.Diagnosa.findById(req.params.id, {
+    include : [Model.Obat]
+  })
+  .then(function(dataDiagnosa) {
+    // res.send(dataDiagnosa.Obats[0])
+    res.render('resep', {
+      dataDiagnosa : dataDiagnosa,
+    })
+  })
+})
+
+router.post('/sakit/:id/obat', function(req, res) {
+  let arrListObat = req.body.listObat
+  if (arrListObat.length > 1) {
+    Model.Obat.findAll({
+      where : {
+        id : {
+          [Model.sequelize.Op.in]: arrListObat
+        },
+      }, include : [Model.Diagnosa],
+        order : [['id', 'ASC']]
+    })
+    .then(obats => {
+      let count = 0;
+      obats.forEach(function(obat) {
+        if (arrListObat.indexOf(String(obat.implikasiObat)) !== -1) {
+          Model.Obat.findById(obat.implikasiObat)
+          .then(function(implikasi) {
+            // console.log(count);
+            obat.dataValues.namaImplikasi = implikasi.namaObat
+            if (count >= obats.length - 1) {
+              // res.send(obats[0])
+              res.render('reportObatFail', {
+                obats : obats,
+              })
+            }
+            count++
+          })
+        } else {
+          count++
+          if (count >= obats.length) {
+            res.send(obats)
+            res.render('reportObat', {
+              obats : obats,
+            })
+          }
+        }
+      })
+    })
+  } else if(arrListObat.length == 1) {
+    Model.Obat.findById(req.body.listObat)
+    .then(function (obats) {
+      res.render('reportObat', {
+        obats : obats
+      })
+    })
+    .catch(function (err) {
+      console.log(err);
+      res.send(err)
+    })
+  } else if(arrListObat.length < 1 || arrListObat == null) {
+    res.send('null')
+  }
+})
+
+
+
+//------------INI UDAH JALAN----------------
+// router.post('/sakit/:id/obat', function(req, res) {
+//   let arrListObat = req.body.listObat
+//   console.log(arrListObat);
+//   if (arrListObat.length > 1) {
+//     let count = 0;
+//
+//     for (let i = 0; i < arrListObat.length; i++) {
+//       Model.Obat.findById(arrListObat[i])
+//       .then(function(obat) {
+//         let isImplikasi = false;
+//         let arrImplikasi = []
+//         for (let j = 0; j < arrListObat.length; j++) {
+//           // console.log('count ', count);
+//           // console.log('length ', req.body.listObat.length);
+//           if (obat.implikasiObat == arrListObat[j]) {
+//             arrImplikasi.push(obat.namaObat)
+//             // res.send('terdapat implikasi')
+//             // console.log(obat.namaObat);
+//             // console.log(arrImplikasi);
+//             isImplikasi = true;
+//             break;
+//           }
+//           // if (count >= arrListObat.length - 1) {
+//           //   res.send('hai')
+//           // }
+//         }
+//         if (count >= arrListObat.length - 1) {
+//           if(isImplikasi) {
+//             res.send(`terdapat implikasi ${arrImplikasi}`)
+//           } else {
+//             res.redirect('/diagnosas')
+//           }
+//         }
+//
+//         count++;
+//       })
+//     }
+//   } else {
+//     res.send('tidak terdapat implikasi obat')
+//   }
+// })
 
 module.exports = router

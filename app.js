@@ -17,12 +17,40 @@ app.use(session({
 
 
 const User = require('./routers/user')
+const Signup = require('./routers/signup')
 const Obat = require('./routers/obat')
 const Diagnosa = require('./routers/diagnosa')
 
+// app.get('/signup',function(req,res){
+//     res.render('login',{
+//         err : null
+//     })
+// })
+// app.post('/signup', function (req, res) {
+//     // res.send('masuk sini')
+//     let objCreate = {
+//         username: req.body.username.toLowerCase(),
+//         password: req.body.password,
+//         email: req.body.email.toLowerCase(),
+//         role : req.body.role
+//     }
+//     // res.send(objCreate)
+//     Model.User.create(objCreate)
+//         .then(function () {
+//             res.redirect('/login')
+//         })
+//         .catch(function (err) {
+//             console.log(err);
+//             res.render('login', {
+//                 err: err.message,
+//             })
+//         })
+// })
 
 app.get('/login', (req, res) => {
-    res.render('login')
+    res.render('login',{
+        err: null
+    })
 })
 
 app.post('/login', function (req, res) {
@@ -75,6 +103,7 @@ app.get('/pasien', authHelper.cekLoginHandler, function (req, res) {
 app.use('/users', authHelper.cekLoginHandler, User)
 app.use('/obats', authHelper.cekLoginHandler, Obat)
 app.use('/diagnosas', authHelper.cekLoginHandler, Diagnosa)
+app.use('/signup',Signup)
 
 app.listen(3000, console.log('ALIVE'))
 
@@ -84,7 +113,7 @@ app.listen(3000, console.log('ALIVE'))
 /*
  - router buat pasien belum
  - form sign up di tampilan depan
- 
+
 
 
 
