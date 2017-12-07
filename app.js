@@ -68,13 +68,13 @@ app.get('/', authHelper.cekLoginHandler, function (req, res) {
     res.render('home')
 })
 
-app.get('/pasien', authHelper.cekLoginHandler, function (req, res) {
+app.get('/pasien', function (req, res) {
     res.send('pasien')
 })
 
-app.use('/users', authHelper.cekLoginHandler, User)
-app.use('/obats', authHelper.cekLoginHandler, Obat)
-app.use('/diagnosas', authHelper.cekLoginHandler, Diagnosa) //OSAS
+app.use('/users', User)
+app.use('/obats', Obat)
+app.use('/diagnosas', Diagnosa) //OSAS
 
 app.listen(4000, console.log('ALIVE'))
 
@@ -84,7 +84,7 @@ app.listen(4000, console.log('ALIVE'))
 /*
  - router buat pasien belum
  - form sign up di tampilan depan
- 
+
 
 
 

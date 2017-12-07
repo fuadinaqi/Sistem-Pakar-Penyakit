@@ -169,35 +169,56 @@ router.get('/sakit/:id/obat', function(req, res) {
 
 router.post('/sakit/:id/obat', function(req, res) {
   let arrListObat = req.body.listObat
-  console.log(arrListObat);
+  if (arrListObat.length > 1) {
     Model.Obat.findAll({
       where : {
         id : {
           [Model.sequelize.Op.in]: arrListObat
         },
-      },
+      }, include : [Model.Diagnosa],
         order : [['id', 'ASC']]
     })
     .then(obats => {
-      // console.log(arrListObat.indexOf('1'));
-      // res.send(obats)
-      // console.log(obats[0]);
       let count = 0;
       obats.forEach(function(obat) {
         if (arrListObat.indexOf(String(obat.implikasiObat)) !== -1) {
-          // console.log(obat.namaObat);
           Model.Obat.findById(obat.implikasiObat)
           .then(function(implikasi) {
-            console.log(`obatnya `, obat.namaObat);
-            console.log(`terimplikasi dengan obat `, implikasi.namaObat);
+            // console.log(count);
+            obat.dataValues.namaImplikasi = implikasi.namaObat
+            if (count >= obats.length - 1) {
+              // res.send(obats[0])
+              res.render('reportObatFail', {
+                obats : obats,
+              })
+            }
+            count++
           })
+        } else {
+          count++
+          if (count >= obats.length) {
+            res.send(obats)
+            res.render('reportObat', {
+              obats : obats,
+            })
+          }
         }
-        if (count >= obats.length - 1) {
-
-        }
-        count++
       })
     })
+  } else if(arrListObat.length == 1) {
+    Model.Obat.findById(req.body.listObat)
+    .then(function (obats) {
+      res.render('reportObat', {
+        obats : obats
+      })
+    })
+    .catch(function (err) {
+      console.log(err);
+      res.send(err)
+    })
+  } else if(arrListObat.length < 1 || arrListObat == null) {
+    res.send('null')
+  }
 })
 
 
