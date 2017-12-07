@@ -74,7 +74,7 @@ app.get('/pasien', authHelper.cekLoginHandler, function (req, res) {
 
 app.use('/users', authHelper.cekLoginHandler, User)
 app.use('/obats', authHelper.cekLoginHandler, Obat)
-app.use('/diagnosas', authHelper.cekLoginHandler, Diagnosa) //OSAS
+app.use('/diagnosas', authHelper.cekLoginHandler, Diagnosa)
 
 app.listen(3000, console.log('ALIVE'))
 
