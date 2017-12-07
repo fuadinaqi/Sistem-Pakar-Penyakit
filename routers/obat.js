@@ -5,21 +5,31 @@ const Model = require('../models')
 
 
 router.get('/', function (req, res) {
+    console.log('obats')
     Model.Obat.findAll()
         .then(function (dataObats) {
+            if (dataObats.length == 0) {
+                res.render('obat', { obat: dataObats })
+            }
             let count = 0;
-            dataObats.forEach(function(row){
-                Model.Obat.findOne({where:{id:row.implikasiObat}})
-                .then(function(namaImplikasi){
-                    row.dataValues.namaImplikasi = namaImplikasi.namaObat
-                    if(dataObats.length-1 <= count){
-                        res.render('obat',{obat:dataObats})
-                    }
-                    count++
-            
-                })
-                
+            dataObats.forEach(function (row) {
+                console.log('obats2')
+                Model.Obat.findOne({ where: { id: row.implikasiObat } })
+                    .then(function (namaImplikasi) {
+                        row.dataValues.namaImplikasi = namaImplikasi.namaObat
+                        if (dataObats.length - 1 <= count) {
+                            res.render('obat', { obat: dataObats })
+                        }
+                        count++
+
+                    })
+                    .catch(function (err) {
+                        res.send(err)
+                    })
+
             })
+        }).catch(function (err) {
+            res.send(err)
         })
 })
 
