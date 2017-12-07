@@ -100,7 +100,7 @@ app.get('/', authHelper.cekLoginHandler, function (req, res) {
     res.render('home')
 })
 
-app.use('/users', User)
+app.use('/users', authHelper.cekLoginHandler, User)
 app.use('/obats', authHelper.cekLoginHandler, Obat)
 app.use('/diagnosas', authHelper.cekLoginHandler, Diagnosa)
 app.use('/signup',Signup)
